@@ -1,0 +1,30 @@
+const db = require('./../db')()
+
+
+//const result = await connection.execute(
+//    `SELECT * FROM your_table WHERE some_column = :value`,
+//    [value]
+//);
+
+
+//const result = await connection.execute(
+//    `INSERT INTO your_table (column1, column2, ...) VALUES (:val1, :val2, ...)`,
+//    data // Array containing values corresponding to the placeholders
+//);
+
+exports.addUser = async (req, res) => {
+    try {
+        const newUser = await db.execute(
+            `INSERT INTO patients (id_patient, nom, prenom, ..)`,
+            [value]
+        );
+        
+        res.status(201).json({
+            status: 'success',
+            data: newUser
+        })
+        
+        } catch (error) {
+        
+    }
+}
