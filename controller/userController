@@ -12,11 +12,18 @@ const db = require('./../db')()
 //    data // Array containing values corresponding to the placeholders
 //);
 
+
+//function to insert new user into 'utilisateurs' table
 exports.addUser = async (req, res) => {
+
+    const { id_user, nomUser, mdp } = req.body;
+
+    const userID = req.params.id;
+
     try {
         const newUser = await db.execute(
-            `INSERT INTO patients (id_patient, nom, prenom, ..)`,
-            [value]
+            `UPDATE utilisateurs SET (id_user = :val1, nomUser = :val2, mdp = :val3) WHERE id_user = :val4`,
+            [id_user, nomUser, mdp, userID]
         );
         
         res.status(201).json({
@@ -26,5 +33,58 @@ exports.addUser = async (req, res) => {
         
         } catch (error) {
         
+        res.status(400).json({
+            status: 'fail',
+            message: error.message
+        })
+    }
+}
+
+//function to update user
+exports.updateUser = async (req, res) => {
+    const userID = req.params.id
+
+    try {
+        const deletedUSer = await db.execute(
+            `DELET FROM utilisateurs WHERE id_user = :val1`,
+            [userID]
+        );
+        
+        res.status(202).json({
+            status: 'success',
+            data: deletedUSer
+        })
+        
+        } catch (error) {
+        
+        res.status(400).json({
+            status: 'fail',
+            message: error.message
+        })
+    }
+}
+
+//function to delet a user
+exports.deletUser = async (req, res) => {
+
+    const userID = req.params.id
+
+    try {
+        const deletedUSer = await db.execute(
+            `DELET FROM utilisateurs WHERE id_user = :val1`,
+            [userID]
+        );
+        
+        res.status(202).json({
+            status: 'success',
+            data: deletedUSer
+        })
+        
+        } catch (error) {
+        
+        res.status(400).json({
+            status: 'fail',
+            message: error.message
+        })
     }
 }
