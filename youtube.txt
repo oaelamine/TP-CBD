@@ -1,1 +1,11 @@
 https://www.youtube.com/watch?v=L5B_UXS-Xus
+
+
+
+
+CREATE TABLE Utilisateurs (
+    ID_utilisateur VARCHAR(10) PRIMARY KEY NOT NULL,
+    nomUser VARCHAR(50),
+    MDP VARCHAR(100),
+    Role VARCHAR(50)
+);

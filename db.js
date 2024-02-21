@@ -1,22 +1,13 @@
-const oracledb = require('oracledb');
+const sqlite3 = require("sqlite3").verbose();
 
-const connectToDatabase = async function() {
+exports.dbConnection = new sqlite3.Database("./database.db", (err) => {
+	if (err) console.log(err);
+	console.log("DATABASE IS CONNECTED");
+});
 
-    try {
-        const connection = await oracledb.getConnection({
-            user: 'your_username',
-            password: 'your_password',
-            connectString: 'localhost/orcl'
-        });
-
-        if(connection) console.log('DB Connected')
-
-        return connection;
-    } catch (err) {
-        console.error(err);
-        throw err; 
-    }
-}
-
-
-module.exports = connectToDatabase
+exports.createTable = function (db, sql) {
+	db.run(sql, (err) => {
+		if (err) console.log(err);
+		// console.log("table created or alredy exists");
+	});
+};
