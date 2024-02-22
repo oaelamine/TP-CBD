@@ -1,8 +1,12 @@
 const express = require("express");
 
 const db = require("./db");
+//ROUTES
 const userRouter = require("./routes/usersRoute");
 const rdvRoute = require("./routes/rdvRoute");
+const patientsRoute = require("./routes/patientsRoute");
+const dossierRoute = require("./routes/dossierRoute");
+const authRouter = require("./routes/authRouter");
 
 const app = express();
 
@@ -59,6 +63,9 @@ Object.values(tables).forEach((el) => {
 //ROUTERS
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/rdv", rdvRoute);
+app.use("/api/v1/patients", patientsRoute);
+app.use("/api/v1/dossiers", dossierRoute);
+app.use("/api/v1/auth", authRouter);
 
 const port = process.env.PORT || 5000;
 

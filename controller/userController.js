@@ -4,6 +4,7 @@ const con = db.dbConnection;
 
 exports.getAllUsers = (req, res) => {
 	const query = `SELECT * FROM Utilisateurs`;
+	//const query = `SELECT * FROM Utilisateurs WHERE nomUser = "orlDrSari" AND MDP = "orlDrSari"`;
 	con.all(query, (err, rows) => {
 		if (err) {
 			res.status(400).json({
@@ -12,6 +13,7 @@ exports.getAllUsers = (req, res) => {
 				err,
 			});
 		}
+		console.log(rows)
 		res.status(200).json({
 			status: "success",
 			data: rows,
